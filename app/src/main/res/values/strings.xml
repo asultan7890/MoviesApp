@@ -2,8 +2,8 @@
     <string name="app_name">MoviesApp</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">MyMovies App</string>
+    <string name="nav_header_subtitle">By: Aleem Sultan, Z23432896</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -24,4 +24,6 @@
     <string name="register_account">Register New Account</string>
     <string name="register">Register</string>
     <string name="login_back">Back to Login</string>
+    <string name="dont_have_account">Don\'t have an account?</string>
+    <string name="already_have_account">Already have an account?</string>
 </resources>
