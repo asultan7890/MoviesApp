@@ -17,4 +17,11 @@
     <string name="year">Year</string>
     <string name="type_movie">Movie</string>
     <string name="type_show">Series</string>
+    <string name="email">Email</string>
+    <string name="pass">Password</string>
+    <string name="confirm_pass">Confirm Password</string>
+    <string name="login">Login</string>
+    <string name="register_account">Register New Account</string>
+    <string name="register">Register</string>
+    <string name="login_back">Back to Login</string>
 </resources>
