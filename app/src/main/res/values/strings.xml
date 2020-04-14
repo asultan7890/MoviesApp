@@ -12,4 +12,9 @@
     <string name="menu_slideshow">Slideshow</string>
 
     <string name="home_second">Home Second</string>
+    <string name="search">Search</string>
+    <string name="title">Title</string>
+    <string name="year">Year</string>
+    <string name="type_movie">Movie</string>
+    <string name="type_show">Series</string>
 </resources>
