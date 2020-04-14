@@ -15,29 +15,20 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
-    private lateinit var emailEt: EditText
-    private lateinit var passwordEt: EditText
-
-    private lateinit var signupBtn: Button
-    private lateinit var loginBtn: Button
-
-    private lateinit var resetPasswordTv: TextView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        emailEt = findViewById(R.id.login_email)
-        passwordEt = findViewById(R.id.login_pass)
-
-        signupBtn = findViewById(R.id.register_account)
-        loginBtn = findViewById(R.id.login_button)
+        var email_input = findViewById<TextView>(R.id.login_email)
+        var pass_input = findViewById<TextView>(R.id.login_pass)
+        var register = findViewById<Button>(R.id.register_account)
+        var login = findViewById<Button>(R.id.login_button)
 
         auth = FirebaseAuth.getInstance()
 
-        loginBtn.setOnClickListener {
-            var email: String = emailEt.text.toString()
-            var password: String = passwordEt.text.toString()
+        login.setOnClickListener {
+            var email: String = email_input.text.toString()
+            var password: String = pass_input.text.toString()
 
             if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                 Toast.makeText(this@LoginActivity, "Please fill all the fields", Toast.LENGTH_LONG).show()
@@ -55,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        signupBtn.setOnClickListener{
+        register.setOnClickListener{
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
             finish()

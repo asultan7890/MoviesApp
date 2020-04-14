@@ -15,32 +15,31 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
-    private lateinit var emailEt: EditText
-    private lateinit var passwordEt: EditText
-
-    private lateinit var signUpBtn: Button
-    private lateinit var loginBtn: Button
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
         auth = FirebaseAuth.getInstance()
 
-        emailEt = findViewById(R.id.register_email)
-        passwordEt = findViewById(R.id.register_pass)
-        var confirm = findViewById<TextView>(R.id.register_confirm)
+        var email_input = findViewById<TextView>(R.id.register_email)
+        var pass_input = findViewById<TextView>(R.id.register_pass)
+        var confirm_input = findViewById<TextView>(R.id.register_confirm)
 
-        loginBtn = findViewById(R.id.register)
-        signUpBtn = findViewById(R.id.login_back)
+        var login = findViewById<Button>(R.id.register)
+        var register = findViewById<Button>(R.id.login_back)
 
-        signUpBtn.setOnClickListener{
-            var email: String = emailEt.text.toString()
-            var password: String = passwordEt.text.toString()
+        register.setOnClickListener{
+            var email: String = email_input.text.toString()
+            var password: String = pass_input.text.toString()
+            var confirm: String = confirm_input.text.toString()
 
             if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                 Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_LONG).show()
-            } else{
+            }
+            else if(password != confirm){
+                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_LONG).show()
+            }
+            else{
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, OnCompleteListener{ task ->
                     if(task.isSuccessful){
                         Toast.makeText(this, "Successfully Registered", Toast.LENGTH_LONG).show()
@@ -54,7 +53,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        loginBtn.setOnClickListener{
+        login.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
