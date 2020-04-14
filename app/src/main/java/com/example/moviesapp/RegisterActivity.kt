@@ -36,9 +36,12 @@ class RegisterActivity : AppCompatActivity() {
             if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                 Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_LONG).show()
             }
-            /*else if(password == confirm){
+            else if (password.length < 6){
+                Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_LONG).show()
+            }
+            else if(!TextUtils.equals(password, confirm)){
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_LONG).show()
-            }*/
+            }
             else{
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, OnCompleteListener{ task ->
                     if(task.isSuccessful){

@@ -1,4 +1,4 @@
-package com.example.moviesapp.ui.gallery
+package com.example.moviesapp.ui.account
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.moviesapp.R
 
-class GalleryFragment : Fragment() {
+class AccountFragment : Fragment() {
 
-    private lateinit var galleryViewModel: GalleryViewModel
+    private lateinit var accountViewModel: AccountViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        galleryViewModel =
-                ViewModelProviders.of(this).get(GalleryViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_gallery, container, false)
-        val textView: TextView = root.findViewById(R.id.text_gallery)
-        galleryViewModel.text.observe(viewLifecycleOwner, Observer {
+        accountViewModel =
+                ViewModelProviders.of(this).get(AccountViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_account, container, false)
+        val textView: TextView = root.findViewById(R.id.text_slideshow)
+        accountViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
