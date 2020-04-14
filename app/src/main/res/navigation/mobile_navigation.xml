@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.moviesapp.ui.home.HomeFragment"
+        android:name="com.example.moviesapp.ui.search.SearchFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home">
+        tools:layout="@layout/fragment_search">
 
         <action
             android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_home_second"
-        android:name="com.example.moviesapp.ui.home.HomeSecondFragment"
+        android:name="com.example.moviesapp.ui.search.HomeSecondFragment"
         android:label="@string/home_second"
         tools:layout="@layout/fragment_home_second">
         <action
