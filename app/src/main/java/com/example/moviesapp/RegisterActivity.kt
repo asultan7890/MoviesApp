@@ -25,8 +25,8 @@ class RegisterActivity : AppCompatActivity() {
         var pass_input = findViewById<TextView>(R.id.register_pass)
         var confirm_input = findViewById<TextView>(R.id.register_confirm)
 
-        var login = findViewById<Button>(R.id.register)
-        var register = findViewById<Button>(R.id.login_back)
+        var register = findViewById<Button>(R.id.register)
+        var login = findViewById<Button>(R.id.login_back)
 
         register.setOnClickListener{
             var email: String = email_input.text.toString()
@@ -36,9 +36,9 @@ class RegisterActivity : AppCompatActivity() {
             if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                 Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_LONG).show()
             }
-            else if(password != confirm){
+            /*else if(password == confirm){
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_LONG).show()
-            }
+            }*/
             else{
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, OnCompleteListener{ task ->
                     if(task.isSuccessful){
