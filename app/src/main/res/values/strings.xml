@@ -26,6 +26,6 @@
     <string name="login_back">Back to Login</string>
     <string name="dont_have_account">Don\'t have an account?</string>
     <string name="already_have_account">Already have an account?</string>
-    <string name="userinfo">Logged in as [username]</string>
+    <string name="userinfo">Logged in as\t</string>
     <string name="logout">Logout</string>
 </resources>
