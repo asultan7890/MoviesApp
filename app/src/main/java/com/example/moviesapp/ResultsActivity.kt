@@ -84,17 +84,6 @@ class ResultsActivity : AppCompatActivity() {
             findViewById(R.id.result6),findViewById(R.id.result7),findViewById(R.id.result8),
             findViewById(R.id.result9),findViewById(R.id.result10))
 
-        val result1 = findViewById<TextView>(R.id.result1)
-        val result2 = findViewById<TextView>(R.id.result2)
-        val result3 = findViewById<TextView>(R.id.result3)
-        val result4 = findViewById<TextView>(R.id.result4)
-        val result5 = findViewById<TextView>(R.id.result5)
-        val result6 = findViewById<TextView>(R.id.result6)
-        val result7 = findViewById<TextView>(R.id.result7)
-        val result8 = findViewById<TextView>(R.id.result8)
-        val result9 = findViewById<TextView>(R.id.result9)
-        val result10 = findViewById<TextView>(R.id.result10)
-
         var url = ""
         var gson = Gson()
 
@@ -128,25 +117,12 @@ class ResultsActivity : AppCompatActivity() {
                 var responses = response.toString()
                 var results = gson.fromJson(responses, SearchResults::class.java)
                 total = results.totalResults
-                //results.Search.size
                 for (x in results.Search.indices){
                     result[x].text = results.Search[x].Title
                 }
-                /*result[0].text = results.Search[0].Title
-                result[1].text = results.Search[1].Title
-                result[2].text = results.Search[2].Title
-                result[3].text = results.Search[3].Title
-                result[4].text = results.Search[4].Title
-                result[5].text = results.Search[5].Title
-                result[6].text = results.Search[6].Title
-                result[7].text = results.Search[7].Title
-                result[8].text = results.Search[8].Title
-                result[9].text = results.Search[9].Title*/
-
-
             },
             Response.ErrorListener { error ->
-                result1.text = "ERROR: %s".format(error.toString())
+                result[0].text = "ERROR: %s".format(error.toString())
             }
         )
 

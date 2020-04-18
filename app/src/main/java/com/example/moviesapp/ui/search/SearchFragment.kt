@@ -49,10 +49,6 @@ class SearchFragment : Fragment() {
                 startActivity(intent)
             }
         }
-        /*val textView: TextView = root.findViewById(R.id.button)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })*/
         return root
     }
 }
