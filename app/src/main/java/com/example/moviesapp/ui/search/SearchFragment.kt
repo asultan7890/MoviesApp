@@ -45,6 +45,7 @@ class SearchFragment : Fragment() {
                 intent.putExtra("Year",year.text.toString())
                 intent.putExtra("Movie",movie.isChecked)
                 intent.putExtra("Series",series.isChecked)
+                intent.putExtra("Page", 1)
                 startActivity(intent)
             }
         }
