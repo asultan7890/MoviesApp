@@ -28,4 +28,7 @@
     <string name="already_have_account">Already have an account?</string>
     <string name="userinfo">Logged in as\t</string>
     <string name="logout">Logout</string>
+    <string name="register_title">Register</string>
+    <string name="login_title">Login</string>
+    <string name="results_title">Results</string>
 </resources>
