@@ -67,6 +67,7 @@ class ResultsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_results)
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true);
 
         val title = intent.getStringExtra("Title")
         val year = intent.getStringExtra("Year")
