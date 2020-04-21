@@ -120,6 +120,11 @@ class ResultsActivity : AppCompatActivity() {
                 total = results.totalResults
                 for (x in results.Search.indices){
                     result[x].text = results.Search[x].Title
+                    result[x].setOnClickListener {
+                        val intent = Intent(this@ResultsActivity, DetailsActivity::class.java)
+                        intent.putExtra("ID", results.Search[x].imdbID)
+                        startActivity(intent)
+                    }
                 }
             },
             Response.ErrorListener { error ->
