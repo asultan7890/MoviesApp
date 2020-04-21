@@ -33,6 +33,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_weight="1"
                     android:contentDescription="@string/poster"
+                    app:srcCompat="@android:drawable/ic_menu_gallery"
                     tools:srcCompat="@android:drawable/ic_menu_gallery" />
 
                 <LinearLayout
@@ -83,7 +84,7 @@
             <TextView
                 android:id="@+id/actors"
                 android:layout_width="match_parent"
-                android:layout_height="144dp"
+                android:layout_height="0dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
@@ -93,10 +94,10 @@
             <TextView
                 android:id="@+id/plot"
                 android:layout_width="match_parent"
-                android:layout_height="129dp"
+                android:layout_height="144dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/plot"
                 android:textSize="20sp" />
 
@@ -121,19 +122,24 @@
             <TextView
                 android:id="@+id/genre"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="59dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="5dp"
                 android:text="@string/genre"
                 android:textSize="20sp" />
 
-            <CheckBox
-                android:id="@+id/checkBox3"
+            <ToggleButton
+                android:id="@+id/favorite_button"
                 android:layout_width="match_parent"
-                android:layout_height="96dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="5dp"
-                android:text="@string/favorite" />
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:text="@string/add_favorite"
+                android:textOff="@string/add_favorite"
+                android:textOn="@string/remove_favorite" />
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

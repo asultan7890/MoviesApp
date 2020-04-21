@@ -41,5 +41,6 @@
     <string name="director">Director</string>
     <string name="imdb">IMDB Rating</string>
     <string name="genre">Genre</string>
-    <string name="favorite">Favorite</string>
+    <string name="add_favorite">Add to Favorites</string>
+    <string name="remove_favorite">Remove from Favorites</string>
 </resources>
