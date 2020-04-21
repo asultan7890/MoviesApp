@@ -63,8 +63,8 @@ class DetailsActivity : AppCompatActivity() {
                 runtime.text = results.Runtime
                 actors.text = results.Actors
                 plot.text = results.Plot
-                director.text = results.Director
-                imdb.text = results.imdbRating
+                director.text = "Directed By: " + results.Director
+                imdb.text = "IMDB Rating: " + results.imdbRating + "/10"
                 genre.text = results.Genre
             },
             Response.ErrorListener { error ->
