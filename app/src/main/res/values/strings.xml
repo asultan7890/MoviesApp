@@ -31,4 +31,15 @@
     <string name="register_title">Register</string>
     <string name="login_title">Login</string>
     <string name="results_title">Results</string>
+    <string name="poster">Poster</string>
+    <string name="detail_title">Title</string>
+    <string name="date">Date</string>
+    <string name="rating">Rating</string>
+    <string name="runtime">Runtime</string>
+    <string name="actors">Actors</string>
+    <string name="plot">Plot</string>
+    <string name="director">Director</string>
+    <string name="imdb">IMDB Rating</string>
+    <string name="genre">Genre</string>
+    <string name="favorite">Favorite</string>
 </resources>
