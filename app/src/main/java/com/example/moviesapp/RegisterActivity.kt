@@ -4,12 +4,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -45,10 +49,24 @@ class RegisterActivity : AppCompatActivity() {
             else{
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, OnCompleteListener{ task ->
                     if(task.isSuccessful){
-                        Toast.makeText(this, "Successfully Registered", Toast.LENGTH_LONG).show()
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
+                        val db = Firebase.firestore
+                        val user = hashMapOf(
+                            "email" to email,
+                            "favorites" to listOf("")
+                        )
+                        db.collection("users")
+                            .add(user)
+                            .addOnSuccessListener { documentReference ->
+                                Toast.makeText(this, "DocumentSnapshot added with ID: ${documentReference.id}", Toast.LENGTH_LONG).show()
+                                Toast.makeText(this, "Successfully Registered", Toast.LENGTH_LONG).show()
+                                val intent = Intent(this, MainActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(this, "Error adding document $e", Toast.LENGTH_LONG).show()
+                            }
+
                     }else {
                         Toast.makeText(this, "Registration Failed", Toast.LENGTH_LONG).show()
                     }
