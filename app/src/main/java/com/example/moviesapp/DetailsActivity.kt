@@ -3,11 +3,16 @@ package com.example.moviesapp
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 
@@ -28,6 +33,7 @@ data class Details(
 )
 
 class DetailsActivity : AppCompatActivity() {
+    private lateinit var user: FirebaseUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +82,22 @@ class DetailsActivity : AppCompatActivity() {
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
 
+        val db = Firebase.firestore
+        user = FirebaseAuth.getInstance().currentUser!!
+
+        val docRef = db.collection("users").document(user.email.toString())
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val favorites = document.get("favorites") as List<*>
+                    Toast.makeText(this,favorites[0].toString(),Toast.LENGTH_LONG).show()
+                } else {
+                    //Log.d(TAG, "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                //Log.d(TAG, "get failed with ", exception)
+            }
 
         fav.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
