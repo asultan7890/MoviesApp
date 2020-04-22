@@ -3,6 +3,7 @@ package com.example.moviesapp
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.Response
@@ -43,7 +44,7 @@ class DetailsActivity : AppCompatActivity() {
         val director = findViewById<TextView>(R.id.director)
         val imdb = findViewById<TextView>(R.id.imdb)
         val genre = findViewById<TextView>(R.id.genre)
-
+        val fav = findViewById<ToggleButton>(R.id.favorite_button)
 
 
         val url = "https://www.omdbapi.com/?apikey=cf10626c&i=$id"
@@ -74,5 +75,18 @@ class DetailsActivity : AppCompatActivity() {
 
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
+
+
+        fav.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                fav.toggle()
+            }
+            else{
+
+            }
+
+        }
+
+
     }
 }

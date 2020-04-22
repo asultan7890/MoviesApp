@@ -54,10 +54,9 @@ class RegisterActivity : AppCompatActivity() {
                             "email" to email,
                             "favorites" to listOf("")
                         )
-                        db.collection("users")
-                            .add(user)
-                            .addOnSuccessListener { documentReference ->
-                                Toast.makeText(this, "DocumentSnapshot added with ID: ${documentReference.id}", Toast.LENGTH_LONG).show()
+                        db.collection("users").document(email)
+                            .set(user)
+                            .addOnSuccessListener {
                                 Toast.makeText(this, "Successfully Registered", Toast.LENGTH_LONG).show()
                                 val intent = Intent(this, MainActivity::class.java)
                                 startActivity(intent)
