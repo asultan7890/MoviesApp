@@ -11,15 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailsActivity"
+        <activity
+            android:name=".DetailsActivity"
             android:label="Details"/>
         <activity
             android:name=".ResultsActivity"
-            android:label="@string/results_title"
-            android:parentActivityName=".MainActivity">
+            android:label="@string/results_title">
+            <!--android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.moviesapp.MainActivity" />
+                android:value="com.example.moviesapp.MainActivity" />-->
         </activity>
         <activity
             android:name=".RegisterActivity"
