@@ -39,6 +39,7 @@ class DetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true);
 
         val id = intent.getStringExtra("ID")
         val title = findViewById<TextView>(R.id.detail_title)
@@ -129,5 +130,9 @@ class DetailsActivity : AppCompatActivity() {
                         Toast.makeText(this,"Error removing from database: $exception",Toast.LENGTH_LONG).show() }
             }
         }
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
