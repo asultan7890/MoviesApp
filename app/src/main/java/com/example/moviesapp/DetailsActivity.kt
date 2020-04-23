@@ -53,7 +53,6 @@ class DetailsActivity : AppCompatActivity() {
         val genre = findViewById<TextView>(R.id.genre)
         val fav = findViewById<ToggleButton>(R.id.favorite_button)
 
-
         val url = "https://www.omdbapi.com/?apikey=cf10626c&i=$id"
         val gson = Gson()
 
@@ -86,8 +85,8 @@ class DetailsActivity : AppCompatActivity() {
         val db = Firebase.firestore
         user = FirebaseAuth.getInstance().currentUser!!
 
-        val firestore_doc = db.collection("users").document(user.email.toString())
-        firestore_doc.get()
+        val doc = db.collection("users").document(user.email.toString())
+        doc.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
                     val favorites = document.get("favorites") as List<*>
@@ -100,8 +99,7 @@ class DetailsActivity : AppCompatActivity() {
 
         fav.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
-                Toast.makeText(this,"Toggle On",Toast.LENGTH_LONG).show()
-                firestore_doc.get()
+                doc.get()
                     .addOnSuccessListener { document ->
                         if (document != null) {
                             val favorites = document.get("favorites") as List<*>
@@ -110,14 +108,13 @@ class DetailsActivity : AppCompatActivity() {
                                 if (x.toString() == id){
                                     found = true }
                             if (!found){
-                                firestore_doc.update("favorites", FieldValue.arrayUnion(id))
+                                doc.update("favorites", FieldValue.arrayUnion(id))
                             }}}}
                     .addOnFailureListener { exception ->
                         Toast.makeText(this, "Error adding to database: $exception",Toast.LENGTH_LONG).show() }
             }
             if (!isChecked){
-                Toast.makeText(this,"Toggle Off",Toast.LENGTH_LONG).show()
-                firestore_doc.get()
+                doc.get()
                     .addOnSuccessListener { document ->
                         if (document != null) {
                             val favorites = document.get("favorites") as List<*>
@@ -126,7 +123,7 @@ class DetailsActivity : AppCompatActivity() {
                                 if (x.toString() == id){
                                     found = true }
                             if (found){
-                                firestore_doc.update("favorites", FieldValue.arrayRemove(id))
+                                doc.update("favorites", FieldValue.arrayRemove(id))
                             }}}}
                     .addOnFailureListener { exception ->
                         Toast.makeText(this,"Error removing from database: $exception",Toast.LENGTH_LONG).show() }
