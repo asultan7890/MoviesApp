@@ -11,6 +11,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
@@ -85,30 +86,51 @@ class DetailsActivity : AppCompatActivity() {
         val db = Firebase.firestore
         user = FirebaseAuth.getInstance().currentUser!!
 
-        val docRef = db.collection("users").document(user.email.toString())
-        docRef.get()
+        val firestore_doc = db.collection("users").document(user.email.toString())
+        firestore_doc.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
                     val favorites = document.get("favorites") as List<*>
-                    Toast.makeText(this,favorites[0].toString(),Toast.LENGTH_LONG).show()
-                } else {
-                    //Log.d(TAG, "No such document")
-                }
-            }
+                    for (x in favorites){
+                        if (x.toString() == id){
+                            if (!fav.isChecked){
+                                fav.toggle()} } }}}
             .addOnFailureListener { exception ->
-                //Log.d(TAG, "get failed with ", exception)
-            }
+                Toast.makeText(this,"Error loading from database: $exception",Toast.LENGTH_LONG).show() }
 
         fav.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
-                fav.toggle()
+                Toast.makeText(this,"Toggle On",Toast.LENGTH_LONG).show()
+                firestore_doc.get()
+                    .addOnSuccessListener { document ->
+                        if (document != null) {
+                            val favorites = document.get("favorites") as List<*>
+                            var found = false
+                            for (x in favorites){
+                                if (x.toString() == id){
+                                    found = true }
+                            if (!found){
+                                firestore_doc.update("favorites", FieldValue.arrayUnion(id))
+                            }}}}
+                    .addOnFailureListener { exception ->
+                        Toast.makeText(this, "Error adding to database: $exception",Toast.LENGTH_LONG).show() }
             }
-            else{
-
+            if (!isChecked){
+                Toast.makeText(this,"Toggle Off",Toast.LENGTH_LONG).show()
+                firestore_doc.get()
+                    .addOnSuccessListener { document ->
+                        if (document != null) {
+                            val favorites = document.get("favorites") as List<*>
+                            var found = false
+                            for (x in favorites){
+                                if (x.toString() == id){
+                                    found = true }
+                            if (found){
+                                firestore_doc.update("favorites", FieldValue.arrayRemove(id))
+                            }}}}
+                    .addOnFailureListener { exception ->
+                        Toast.makeText(this,"Error removing from database: $exception",Toast.LENGTH_LONG).show() }
             }
-
         }
-
-
     }
 }
