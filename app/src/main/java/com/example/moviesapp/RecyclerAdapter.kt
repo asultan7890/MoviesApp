@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
+// custom adapter that helps the favorites fragment with the recycler view
 class ListAdapter(val favlist: MutableList<List<String>>) : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
     override fun onCreateViewHolder(x: ViewGroup, y: Int): ViewHolder {
         val z = LayoutInflater.from(x.context).inflate(R.layout.adapter_layout, x, false)
@@ -17,6 +18,7 @@ class ListAdapter(val favlist: MutableList<List<String>>) : RecyclerView.Adapter
     }
     override fun onBindViewHolder(x: ViewHolder, y: Int) {
 
+        // show title for each favorite and open details when clicked on
         x.name?.text = favlist[y][1]
         x.name.setOnClickListener {
             val intent = Intent(x.name.context, DetailsActivity::class.java)

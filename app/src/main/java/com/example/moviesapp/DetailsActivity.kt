@@ -41,6 +41,7 @@ class DetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_details)
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true);
 
+        // get variables
         val id = intent.getStringExtra("ID")
         val title = findViewById<TextView>(R.id.detail_title)
         val poster = findViewById<ImageView>(R.id.poster)
@@ -64,6 +65,7 @@ class DetailsActivity : AppCompatActivity() {
                 val responses = response.toString()
                 val results = gson.fromJson(responses, Details::class.java)
 
+                // update screen with details from API
                 title.text = results.Title
                 Picasso.get().load(results.Poster).into(poster)
                 date.text = results.Released
@@ -86,6 +88,7 @@ class DetailsActivity : AppCompatActivity() {
         val db = Firebase.firestore
         user = FirebaseAuth.getInstance().currentUser!!
 
+        // check if movie/series is already favorited
         val doc = db.collection("users").document(user.email.toString())
         doc.get()
             .addOnSuccessListener { document ->
@@ -99,6 +102,7 @@ class DetailsActivity : AppCompatActivity() {
                 Toast.makeText(this,"Error loading from database: $exception",Toast.LENGTH_LONG).show() }
 
         fav.setOnCheckedChangeListener { _, isChecked ->
+            // save new movie/series to favorites database
             if (isChecked){
                 doc.get()
                     .addOnSuccessListener { document ->
@@ -114,6 +118,7 @@ class DetailsActivity : AppCompatActivity() {
                     .addOnFailureListener { exception ->
                         Toast.makeText(this, "Error adding to database: $exception",Toast.LENGTH_LONG).show() }
             }
+            // delete movie/series from favorites database
             if (!isChecked){
                 doc.get()
                     .addOnSuccessListener { document ->

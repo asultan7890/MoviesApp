@@ -24,12 +24,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // check that user is logged in
         auth = FirebaseAuth.getInstance()
         if (auth.currentUser == null){
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }
+
+        // initialize layout and load navigation drawer
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)

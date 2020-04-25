@@ -19,6 +19,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        // get variables
         var email_input = findViewById<TextView>(R.id.login_email)
         var pass_input = findViewById<TextView>(R.id.login_pass)
         var register = findViewById<Button>(R.id.register_account)
@@ -26,6 +27,7 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
+        // login functionality when user clicks button
         login.setOnClickListener {
             var email: String = email_input.text.toString()
             var password: String = pass_input.text.toString()
@@ -46,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        // go to register screen
         register.setOnClickListener{
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)

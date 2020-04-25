@@ -17,6 +17,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 
+// singleton class to help with json requests
 class MySingleton constructor(context: Context) {
     companion object {
         @Volatile
@@ -50,6 +51,7 @@ class MySingleton constructor(context: Context) {
     }
 }
 
+// data classes to store json results
 data class SearchResults(
     val Search: List<Search>,
     val totalResults: Int
@@ -69,6 +71,7 @@ class ResultsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_results)
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true);
 
+        // get variables
         val title = intent.getStringExtra("Title")
         val year = intent.getStringExtra("Year")
         val movie = intent.getBooleanExtra("Movie", true)
@@ -88,7 +91,7 @@ class ResultsActivity : AppCompatActivity() {
         var url = ""
         var gson = Gson()
 
-
+        // get different urls based on user's input
         if (year.toString() == ""){
             if (movie and !series){
                 url = "https://www.omdbapi.com/?apikey=cf10626c&s=" + title.toString() + "&type=movie" + "&page=" + page
@@ -118,6 +121,7 @@ class ResultsActivity : AppCompatActivity() {
                 var responses = response.toString()
                 var results = gson.fromJson(responses, SearchResults::class.java)
                 total = results.totalResults
+                // display results in textviews
                 for (x in results.Search.indices){
                     result[x].text = results.Search[x].Title
                     result[x].setOnClickListener {
@@ -135,6 +139,7 @@ class ResultsActivity : AppCompatActivity() {
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
 
+        // previous page button functionality
         prev.setOnClickListener {
             if (page == 1){
                 Toast.makeText(this, "Already viewing the first page", Toast.LENGTH_LONG).show()
@@ -150,6 +155,7 @@ class ResultsActivity : AppCompatActivity() {
             }
         }
 
+        // next page button functionality
         next.setOnClickListener {
             if ((total-(10*page)) < 0){
                 Toast.makeText(this, "No more results to view", Toast.LENGTH_LONG).show()

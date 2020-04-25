@@ -25,18 +25,20 @@ class RegisterActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
+        // get variables
         var email_input = findViewById<TextView>(R.id.register_email)
         var pass_input = findViewById<TextView>(R.id.register_pass)
         var confirm_input = findViewById<TextView>(R.id.register_confirm)
-
         var register = findViewById<Button>(R.id.register)
         var login = findViewById<Button>(R.id.login_back)
 
+        // register functionality
         register.setOnClickListener{
             var email: String = email_input.text.toString()
             var password: String = pass_input.text.toString()
             var confirm: String = confirm_input.text.toString()
 
+            // perform various checks during registration process
             if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                 Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_LONG).show()
             }
@@ -47,6 +49,7 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_LONG).show()
             }
             else{
+                // store registration information in firebase
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, OnCompleteListener{ task ->
                     if(task.isSuccessful){
                         val db = Firebase.firestore
@@ -73,6 +76,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
+        // go back to login screen
         login.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)

@@ -22,12 +22,15 @@ class SearchFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_search, container, false)
+
+        // set variables for components of screen
         val title = root.findViewById<TextView>(R.id.title)
         val year = root.findViewById<TextView>(R.id.year)
         val movie = root.findViewById<CheckBox>(R.id.checkBox)
         val series = root.findViewById<CheckBox>(R.id.checkBox2)
         val search = root.findViewById<Button>(R.id.button)
 
+        // search functionality
         search.setOnClickListener {
             if (title.toString() == ""){
                 Toast.makeText(activity, "Please enter a title", Toast.LENGTH_LONG).show()

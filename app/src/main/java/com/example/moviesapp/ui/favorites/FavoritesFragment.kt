@@ -34,11 +34,14 @@ class FavoritesFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_favorites, container, false)
 
+        // refresh button
         val refresh = root.findViewById<Button>(R.id.refresh)
         refresh.setOnClickListener {
             val ft = requireFragmentManager().beginTransaction()
             ft.detach(this).attach(this).commit()
         }
+
+        // get favorites list from database
         val db = Firebase.firestore
         user = FirebaseAuth.getInstance().currentUser!!
         val doc = db.collection("users").document(user.email.toString())
@@ -69,6 +72,7 @@ class FavoritesFragment : Fragment() {
                         // Access the RequestQueue through your singleton class.
                         activity?.let { MySingleton.getInstance(it).addToRequestQueue(jsonObjectRequest) } }
 
+                    // display favorites using recycler view
                     Thread.sleep(500)
                     val recycler = root.findViewById<RecyclerView>(R.id.recycler)
                     recycler.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
