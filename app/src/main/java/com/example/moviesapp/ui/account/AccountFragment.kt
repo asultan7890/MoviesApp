@@ -16,7 +16,6 @@ import com.google.firebase.auth.FirebaseUser
 
 class AccountFragment : Fragment() {
 
-    private lateinit var accountViewModel: AccountViewModel
     private lateinit var user: FirebaseUser
 
     override fun onCreateView(
@@ -24,8 +23,6 @@ class AccountFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        accountViewModel =
-                ViewModelProviders.of(this).get(AccountViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_account, container, false)
         val logout = root.findViewById<Button>(R.id.logout)
         user = FirebaseAuth.getInstance().currentUser!!
@@ -38,6 +35,4 @@ class AccountFragment : Fragment() {
         }
         return root
     }
-
-
 }
