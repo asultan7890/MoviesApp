@@ -32,7 +32,7 @@ class SearchFragment : Fragment() {
 
         // search functionality
         search.setOnClickListener {
-            if (title.toString() == ""){
+            if (title.text.toString() == ""){
                 Toast.makeText(activity, "Please enter a title", Toast.LENGTH_LONG).show()
             }
             else if (!movie.isChecked and !series.isChecked){
