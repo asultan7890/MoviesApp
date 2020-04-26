@@ -6,9 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".ui.account.AccountFragment">
 
+    <TextView
+        android:id="@+id/apptitle4"
+        android:layout_width="278dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="80dp"
+        android:text="@string/apptitle"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <LinearLayout
-        android:layout_width="344dp"
-        android:layout_height="403dp"
+        android:id="@+id/linearLayout4"
+        android:layout_width="348dp"
+        android:layout_height="239dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
