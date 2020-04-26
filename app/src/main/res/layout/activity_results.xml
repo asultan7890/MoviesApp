@@ -218,7 +218,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="previous" />
+                    android:text="@string/previous" />
 
                 <TextView
                     android:id="@+id/page"
@@ -232,7 +232,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="next" />
+                    android:text="@string/next" />
             </LinearLayout>
 
         </LinearLayout>
