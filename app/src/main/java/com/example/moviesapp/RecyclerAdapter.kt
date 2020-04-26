@@ -19,7 +19,7 @@ class ListAdapter(val favlist: MutableList<List<String>>) : RecyclerView.Adapter
     override fun onBindViewHolder(x: ViewHolder, y: Int) {
 
         // show title for each favorite and open details when clicked on
-        x.name?.text = favlist[y][1]
+        x.name?.text = favlist[y][1] + " (" + favlist[y][2] + ")"
         x.name.setOnClickListener {
             val intent = Intent(x.name.context, DetailsActivity::class.java)
             intent.putExtra("ID", favlist[y][0])

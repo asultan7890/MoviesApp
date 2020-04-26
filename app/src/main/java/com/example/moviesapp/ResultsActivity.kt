@@ -123,7 +123,7 @@ class ResultsActivity : AppCompatActivity() {
                 total = results.totalResults
                 // display results in textviews
                 for (x in results.Search.indices){
-                    result[x].text = results.Search[x].Title
+                    result[x].text = results.Search[x].Title + " (" + results.Search[x].Year + ")"
                     result[x].setOnClickListener {
                         val intent = Intent(this@ResultsActivity, DetailsActivity::class.java)
                         intent.putExtra("ID", results.Search[x].imdbID)

@@ -62,8 +62,8 @@ class FavoritesFragment : Fragment() {
                                 val responses = response.toString()
                                 val results = gson.fromJson(responses, Details::class.java)
 
-                                val pair = listOf(x,results.Title)
-                                favlist.add(pair)
+                                val item = listOf(x,results.Title, results.Year)
+                                favlist.add(item)
                             },
                             Response.ErrorListener { error ->
                                 Toast.makeText(activity,"Error loading from API: $error", Toast.LENGTH_LONG).show()
