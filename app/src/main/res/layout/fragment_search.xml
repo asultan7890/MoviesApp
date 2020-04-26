@@ -6,9 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".ui.search.SearchFragment">
 
+    <TextView
+        android:id="@+id/apptitle3"
+        android:layout_width="278dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="80dp"
+        android:text="@string/apptitle"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <LinearLayout
-        android:layout_width="339dp"
-        android:layout_height="497dp"
+        android:id="@+id/linearLayout5"
+        android:layout_width="340dp"
+        android:layout_height="372dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,10 +40,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:layout_marginTop="704dp"
+                android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/title"
-                android:inputType="text"
-                android:autofillHints="" />
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
