@@ -51,33 +51,38 @@ class FavoritesFragment : Fragment() {
 
                     val favorites = document.get("favorites") as List<String>
                     var favlist = mutableListOf<List<String>>()
-                    for (x in favorites.drop(1)) {
-                        val url = "https://www.omdbapi.com/?apikey=cf10626c&i=$x"
-                        val gson = Gson()
 
-                        //Request and parse the json movie results
-                        val jsonObjectRequest = JsonObjectRequest(
-                            Request.Method.GET, url, null,
-                            Response.Listener { response ->
-                                val responses = response.toString()
-                                val results = gson.fromJson(responses, Details::class.java)
+                    if (favorites.drop(1).isEmpty()){
+                        Toast.makeText(activity,"No favorites to display", Toast.LENGTH_LONG).show()
+                    }
+                    else {
+                        for (x in favorites.drop(1)) {
+                            val url = "https://www.omdbapi.com/?apikey=cf10626c&i=$x"
+                            val gson = Gson()
 
-                                val item = listOf(x,results.Title, results.Year)
-                                favlist.add(item)
-                            },
-                            Response.ErrorListener { error ->
-                                Toast.makeText(activity,"Error loading from API: $error", Toast.LENGTH_LONG).show()
-                            })
+                            //Request and parse the json movie results
+                            val jsonObjectRequest = JsonObjectRequest(
+                                Request.Method.GET, url, null,
+                                Response.Listener { response ->
+                                    val responses = response.toString()
+                                    val results = gson.fromJson(responses, Details::class.java)
 
-                        // Access the RequestQueue through your singleton class.
-                        activity?.let { MySingleton.getInstance(it).addToRequestQueue(jsonObjectRequest) } }
+                                    val item = listOf(x,results.Title, results.Year)
+                                    favlist.add(item)
+                                },
+                                Response.ErrorListener { error ->
+                                    Toast.makeText(activity,"Error loading from API: $error", Toast.LENGTH_LONG).show()
+                                })
 
-                    // display favorites using recycler view
-                    Thread.sleep(500)
-                    val recycler = root.findViewById<RecyclerView>(R.id.recycler)
-                    recycler.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-                    val listadapter = ListAdapter(favlist)
-                    recycler.adapter = listadapter
+                            // Access the RequestQueue through your singleton class.
+                            activity?.let { MySingleton.getInstance(it).addToRequestQueue(jsonObjectRequest) } }
+
+                        // display favorites using recycler view
+                        Thread.sleep(500)
+                        val recycler = root.findViewById<RecyclerView>(R.id.recycler)
+                        recycler.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+                        val listadapter = ListAdapter(favlist)
+                        recycler.adapter = listadapter }
                 } }
             .addOnFailureListener { exception ->
                 Toast.makeText(activity,"Error loading from database: $exception", Toast.LENGTH_LONG).show() }
