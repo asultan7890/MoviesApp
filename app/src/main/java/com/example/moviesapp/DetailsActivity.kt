@@ -17,6 +17,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 
+// data class to store json results
 data class Details(
     val Title: String,
     val Year: String,
@@ -58,7 +59,7 @@ class DetailsActivity : AppCompatActivity() {
         val url = "https://www.omdbapi.com/?apikey=cf10626c&i=$id"
         val gson = Gson()
 
-        //Request and parse the json movie results
+        // request and parse the json movie results
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET, url, null,
             Response.Listener { response ->
@@ -89,6 +90,7 @@ class DetailsActivity : AppCompatActivity() {
         user = FirebaseAuth.getInstance().currentUser!!
 
         // check if movie/series is already favorited
+        // if it is, make sure favorites button is toggled on
         val doc = db.collection("users").document(user.email.toString())
         doc.get()
             .addOnSuccessListener { document ->
@@ -101,6 +103,7 @@ class DetailsActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Toast.makeText(this,"Error loading from database: $exception",Toast.LENGTH_LONG).show() }
 
+        // favorites button functionality
         fav.setOnCheckedChangeListener { _, isChecked ->
             // save new movie/series to favorites database
             if (isChecked){
@@ -136,6 +139,7 @@ class DetailsActivity : AppCompatActivity() {
             }
         }
     }
+    // back button
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true

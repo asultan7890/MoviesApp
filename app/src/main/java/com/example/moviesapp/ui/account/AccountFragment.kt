@@ -24,12 +24,14 @@ class AccountFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_account, container, false)
-
-        // logout button
         val logout = root.findViewById<Button>(R.id.logout)
+
+        // get user email from database
         user = FirebaseAuth.getInstance().currentUser!!
         val userinfo = root.findViewById<TextView>(R.id.userinfo)
         userinfo.append(user.email)
+
+        // logout button
         logout.setOnClickListener{
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(activity, LoginActivity::class.java)

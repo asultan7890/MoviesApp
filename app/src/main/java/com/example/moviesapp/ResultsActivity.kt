@@ -29,18 +29,6 @@ class MySingleton constructor(context: Context) {
                 }
             }
     }
-    val imageLoader: ImageLoader by lazy {
-        ImageLoader(requestQueue,
-            object : ImageLoader.ImageCache {
-                private val cache = LruCache<String, Bitmap>(20)
-                override fun getBitmap(url: String): Bitmap {
-                    return cache.get(url)
-                }
-                override fun putBitmap(url: String, bitmap: Bitmap) {
-                    cache.put(url, bitmap)
-                }
-            })
-    }
     private val requestQueue: RequestQueue by lazy {
         // applicationContext is key, it keeps you from leaking the
         // Activity or BroadcastReceiver if someone passes one in.
@@ -114,7 +102,7 @@ class ResultsActivity : AppCompatActivity() {
                 url = "https://www.omdbapi.com/?apikey=cf10626c&s=" + title.toString() + "&y=" + year.toString() + "&page=" + page
             }
         }
-        //Request and parse the json weather results
+        // request and parse the json movie results
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET, url, null,
             Response.Listener { response ->
@@ -124,6 +112,7 @@ class ResultsActivity : AppCompatActivity() {
                 // display results in textviews
                 for (x in results.Search.indices){
                     result[x].text = results.Search[x].Title + " (" + results.Search[x].Year + ")"
+                    // go to details page if a result is clicked on
                     result[x].setOnClickListener {
                         val intent = Intent(this@ResultsActivity, DetailsActivity::class.java)
                         intent.putExtra("ID", results.Search[x].imdbID)

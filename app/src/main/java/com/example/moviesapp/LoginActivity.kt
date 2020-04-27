@@ -32,9 +32,11 @@ class LoginActivity : AppCompatActivity() {
             var email: String = email_input.text.toString()
             var password: String = pass_input.text.toString()
 
+            // error checking user's input
             if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                 Toast.makeText(this@LoginActivity, "Please fill all the fields", Toast.LENGTH_LONG).show()
             } else{
+                // log in with firebase
                 auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, OnCompleteListener { task ->
                     if(task.isSuccessful) {
                         Toast.makeText(this, "Successfully Logged In", Toast.LENGTH_LONG).show()

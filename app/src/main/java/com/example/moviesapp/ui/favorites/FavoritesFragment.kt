@@ -52,15 +52,17 @@ class FavoritesFragment : Fragment() {
                     val favorites = document.get("favorites") as List<String>
                     var favlist = mutableListOf<List<String>>()
 
+                    // display message if there are no favorites
                     if (favorites.drop(1).isEmpty()){
                         Toast.makeText(activity,"No favorites to display", Toast.LENGTH_LONG).show()
                     }
+                    // use api to get information about favorites based on their id's
                     else {
                         for (x in favorites.drop(1)) {
                             val url = "https://www.omdbapi.com/?apikey=cf10626c&i=$x"
                             val gson = Gson()
 
-                            //Request and parse the json movie results
+                            // request and parse the json movie results
                             val jsonObjectRequest = JsonObjectRequest(
                                 Request.Method.GET, url, null,
                                 Response.Listener { response ->

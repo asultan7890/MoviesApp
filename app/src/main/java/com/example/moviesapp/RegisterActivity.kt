@@ -49,7 +49,7 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_LONG).show()
             }
             else{
-                // store registration information in firebase
+                // store registration information in firebase and log in the user
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, OnCompleteListener{ task ->
                     if(task.isSuccessful){
                         val db = Firebase.firestore

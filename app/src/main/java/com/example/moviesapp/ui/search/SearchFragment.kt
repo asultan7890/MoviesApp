@@ -32,6 +32,7 @@ class SearchFragment : Fragment() {
 
         // search functionality
         search.setOnClickListener {
+            // error checking on user's input
             if (title.text.toString() == ""){
                 Toast.makeText(activity, "Please enter a title", Toast.LENGTH_LONG).show()
             }
@@ -39,6 +40,7 @@ class SearchFragment : Fragment() {
                 Toast.makeText(activity, "Please select Movie, Series, or both of them", Toast.LENGTH_LONG).show()
             }
             else{
+                // use intent to send user's input to results
                 val intent = Intent(activity, ResultsActivity::class.java)
                 intent.putExtra("Title",title.text.toString())
                 intent.putExtra("Year",year.text.toString())
